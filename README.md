@@ -7,22 +7,22 @@ Plain Ada 2023 exercise cores for Logic Forge (clean-room designs). Each subdire
 | Exercise | Path | Status |
 |----------|------|--------|
 | Sequence Match | [`sequence_match/`](sequence_match/) | Full session API + CLI — **try this first** |
-| Number Grid | [`number_grid/`](number_grid/) | Spec stub |
-| Path Plan | [`path_plan/`](path_plan/) | Spec stub |
-| Timed Choice RT | [`timed_choice_rt/`](timed_choice_rt/) | Spec stub |
-| Recall Span | [`recall_span/`](recall_span/) | Spec stub |
-| Rule Infer | [`rule_infer/`](rule_infer/) | Spec stub |
+| Number Grid | [`number_grid/`](number_grid/) | Ready to try — session API + CLI |
+| Path Plan | [`path_plan/`](path_plan/) | Ready to try — session API + CLI |
+| Timed Choice RT | [`timed_choice_rt/`](timed_choice_rt/) | Ready to try — session API + CLI |
+| Recall Span | [`recall_span/`](recall_span/) | Ready to try — session API + CLI |
+| Rule Infer | [`rule_infer/`](rule_infer/) | Ready to try — session API + CLI |
 
-### Sequence Match (first playable)
+### Quick start (any exercise)
 
 ```bash
 git clone https://github.com/RobertBoettcherSF/LogicForge-Exercises.git
-cd LogicForge-Exercises/sequence_match
-make test    # 42 assertions, expect 0 failed
-make play    # interactive y/n session (seed 42)
+cd LogicForge-Exercises/<exercise>
+make test    # 42 assertions, expect 0 failed / 0 warnings
+make play    # optional interactive CLI
 ```
 
-Locale string IDs (`sequence_match.instruction`, etc.) are ready for a JSON i18n host. Steamworks / Deck / i18n shell are separate epics.
+Locale string IDs (`*.instruction`, etc.) are ready for a JSON i18n host. Steamworks / Deck / i18n shell are separate epics.
 
 ## License
 
