@@ -8,50 +8,48 @@ package body Sequence_Match is
      (State : in out U32; Value : out Natural; Limit : Positive)
    is
    begin
+      --  Numerical Recipes LCG — deterministic educational PRNG.
       State := State * 1664525 + 1013904223;
       Value := Natural (State mod U32 (Limit)) + 1;
    end Next_Rand;
 
+   function Hamming_Distance (Target, Probe : Sequence) return Natural is
+      D : Natural := 0;
+   begin
+      for I in Target'Range loop
+         if Target (I) /= Probe (I) then
+            D := D + 1;
+         end if;
+      end loop;
+      return D;
+   end Hamming_Distance;
+
    function Is_Match
      (Target, Probe : Sequence; Mode : Match_Mode) return Boolean
    is
-      Diffs : Natural := 0;
    begin
       if Target'Length /= Probe'Length then
          return False;
       end if;
 
-      for I in Target'Range loop
-         if Target (I) /= Probe (I) then
-            Diffs := Diffs + 1;
-            if Mode = Exact then
-               return False;
-            elsif Diffs > 1 then
-               return False;
-            end if;
-         end if;
-      end loop;
-
       case Mode is
          when Exact =>
-            return True;
+            return Hamming_Distance (Target, Probe) = 0;
          when Allow_One_Substitution =>
-            return Diffs <= 1;
+            return Hamming_Distance (Target, Probe) <= 1;
       end case;
    end Is_Match;
 
    function Trial_Score
-     (Target, Probe : Sequence;
-      Mode          : Match_Mode;
-      User_Says_Match : Boolean) return Natural
+     (Target, Probe     : Sequence;
+      Mode              : Match_Mode;
+      User_Says_Match   : Boolean) return Natural
    is
-      Actual : constant Boolean := Is_Match (Target, Probe, Mode);
    begin
-      if User_Says_Match = Actual then
+      if User_Says_Match = Is_Match (Target, Probe, Mode) then
          return 1;
-      else
-         return 0;
       end if;
+      return 0;
    end Trial_Score;
 
    function Slice (T : Fixed_Sequence; Len : Positive) return Sequence is
@@ -94,6 +92,7 @@ package body Sequence_Match is
       end if;
       Probe (Pos) := S;
 
+      --  Under Allow_One_Substitution, one edit would still match — force 2.
       if Mode = Allow_One_Substitution then
          Next_Rand (State, Pos2, Len);
          if Pos2 = Pos and then Len > 1 then
@@ -112,10 +111,20 @@ package body Sequence_Match is
       Trials : out Trial_List;
       Count  : out Natural)
    is
-      State : U32 := U32 (if Cfg.Seed = 0 then 1 else Cfg.Seed);
-      Roll  : Natural;
+      State      : U32;
+      Roll       : Natural;
       Want_Match : Boolean;
    begin
+      if not Config_Ok (Cfg) then
+         raise Invalid_Argument;
+      end if;
+
+      if Cfg.Seed = 0 then
+         State := 1;
+      else
+         State := U32 (Cfg.Seed);
+      end if;
+
       Count := Cfg.Trial_Count;
       Trials := [others => <>];
 
@@ -150,10 +159,15 @@ package body Sequence_Match is
    is
       R : Session_Result;
    begin
+      if not Config_Ok (Cfg) or else Count /= Cfg.Trial_Count then
+         raise Invalid_Argument;
+      end if;
+
       R.Config := Cfg;
       R.Trials_Run := Count;
       R.Max_Score := Count;
       R.Score := 0;
+
       for I in 1 .. Count loop
          R.Score :=
            R.Score
