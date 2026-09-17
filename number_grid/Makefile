@@ -1,15 +1,22 @@
-GNAT := gnatmake
-FLAGS := -gnatwa -gnat2022 -gnata
+GNAT    := gnatmake
+FLAGS   := -gnatwa -gnat2022
 OBJ_DIR := obj
+BIN_DIR := bin
 
-.PHONY: all test clean
+.PHONY: all test play clean
 
-all:
-	mkdir -p $(OBJ_DIR)
+all: $(BIN_DIR)/tests $(BIN_DIR)/play
+
+$(BIN_DIR)/tests $(BIN_DIR)/play: *.ads *.adb *.gpr
+	mkdir -p $(OBJ_DIR) $(BIN_DIR)
 	$(GNAT) $(FLAGS) -Pnumber_grid.gpr
 
 test: all
-	@$(OBJ_DIR)/tests 2>/dev/null || ./tests
+	@echo "Running tests..."
+	@$(BIN_DIR)/tests
+
+play: all
+	@$(BIN_DIR)/play
 
 clean:
-	rm -rf $(OBJ_DIR) tests *.ali *.o
+	rm -rf $(OBJ_DIR) $(BIN_DIR)
