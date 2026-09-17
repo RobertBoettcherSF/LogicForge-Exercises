@@ -1,0 +1,6 @@
+obj/
+*.ali
+*.o
+tests
+play
+bin/
