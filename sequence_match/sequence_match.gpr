@@ -1,0 +1,8 @@
+project Sequence_Match is
+   for Source_Dirs use (".");
+   for Object_Dir use "obj";
+   for Main use ("tests.adb", "play.adb");
+   package Builder is
+      for Default_Switches ("Ada") use ("-gnatwa", "-gnat2022", "-gnata");
+   end Builder;
+end Sequence_Match;
