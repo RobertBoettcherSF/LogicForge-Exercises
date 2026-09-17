@@ -6,14 +6,14 @@ Plain Ada 2022 CLI exercise cores for Logic Forge (clean-room designs).
 ```bash
 make test
 make play
-make test EXERCISE=morse_decode
+make test EXERCISE=alpha_bravo
 make list
 ```
 
-## Ready to try (48 cores)
+## Ready to try (54 cores)
 
-Waves 1–8: 48 headless Ada packages.
+Waves 1–9: 54 headless Ada packages.
 
-Wave 8: `morse_decode` `route_steps` `scale_read` `stop_hold` `type_copy` `ufo_count`
+Wave 9: `alpha_bravo` `calorie_guess` `color_label` `element_pick` `geo_pick` `wisdom_pick`
 
 Steam GUI is a separate epic.
