@@ -73,8 +73,8 @@ is
    end record;
 
    function Config_Ok (Cfg : Session_Config) return Boolean is
-     (Cfg.Trial_Count in 1 .. Max_Trials
-      and then Cfg.Seq_Length in 1 .. Max_Len
+     (Cfg.Trial_Count <= Max_Trials
+      and then Cfg.Seq_Length <= Max_Len
       and then Cfg.Match_Rate <= 100);
 
    type Fixed_Sequence is array (1 .. Max_Len) of Symbol;
