@@ -2,6 +2,15 @@
 
 Plain Ada 2023 exercise cores for Logic Forge (clean-room designs). Each subdirectory is a standalone package: `make test` builds and runs `tests.adb` under `-gnatwa -gnat2022`.
 
+
+## Quick start (repo root)
+
+```bash
+make test    # defaults to sequence_match
+make play
+# or: cd sequence_match && make test
+```
+
 ## Ready to try
 
 | Exercise | Path | Status |
