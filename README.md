@@ -1,37 +1,21 @@
 # LogicForge-Exercises
 
-Plain Ada 2022 CLI exercise cores for Logic Forge (clean-room designs). Each subdirectory is a standalone package.
+Plain Ada 2022 CLI exercise cores for Logic Forge (clean-room designs).
 
-## Quick start (repo root)
+## Quick start
 
 ```bash
-make test                 # defaults to sequence_match
+make test
 make play
-make test EXERCISE=novelty_check
+make test EXERCISE=multiply_drill
 make list
 ```
 
-## Ready to try (18 cores)
+## Ready to try (24 cores)
 
-| Exercise | Path |
-|----------|------|
-| Sequence Match | `sequence_match/` |
-| Number Grid | `number_grid/` |
-| Path Plan | `path_plan/` |
-| Timed Choice RT | `timed_choice_rt/` |
-| Recall Span | `recall_span/` |
-| Rule Infer | `rule_infer/` |
-| Novelty Check | `novelty_check/` |
-| Visual Search | `visual_search/` |
-| Go / NoGo | `go_nogo/` |
-| Word Unscramble | `word_unscramble/` |
-| Number Series | `number_series/` |
-| Spatial Memory | `spatial_memory/` |
-| Compare Items | `compare_items/` |
-| Compass Orient | `compass_orient/` |
-| Conflict Label | `conflict_label/` |
-| Symbol Code | `symbol_code/` |
-| Percent Estimate | `percent_estimate/` |
-| Category Decide | `category_decide/` |
+Wave 1: `sequence_match` `number_grid` `path_plan` `timed_choice_rt` `recall_span` `rule_infer`  
+Wave 2: `novelty_check` `visual_search` `go_nogo` `word_unscramble` `number_series` `spatial_memory`  
+Wave 3: `compare_items` `compass_orient` `conflict_label` `symbol_code` `percent_estimate` `category_decide`  
+Wave 4: `multiply_drill` `quantity_compare` `scan_count` `money_change` `clock_read` `vocabulary_pick`
 
 Steam GUI is a separate epic (these packages stay the headless engine).
