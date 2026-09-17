@@ -6,14 +6,14 @@ Plain Ada 2022 CLI exercise cores for Logic Forge (clean-room designs).
 ```bash
 make test
 make play
-make test EXERCISE=calendar_offset
+make test EXERCISE=parity_count
 make list
 ```
 
-## Ready to try (30 cores)
+## Ready to try (36 cores)
 
-Waves 1–5: 30 headless Ada packages with `make test` / `make play`.
+Waves 1–6: 36 headless Ada packages.
 
-Wave 5: `calendar_offset` `geometry_sides` `follow_pattern` `pair_associate` `line_measure` `odd_one_out`
+Wave 6: `parity_count` `sum_digits` `min_of_three` `max_of_three` `subtract_check` `double_half`
 
 Steam GUI is a separate epic.
